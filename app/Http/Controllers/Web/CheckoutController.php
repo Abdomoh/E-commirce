@@ -40,10 +40,18 @@ class CheckoutController extends Controller
         $products = Cart::where('user_id', Auth::user()->id ?? '')->get();
         if ($products->count() > 0) {
 
+            $order_uniq=Order::orderBy('id','desc')->pluck('id')->first();
+            if($order_uniq==null or $order_uniq=="") {
+                $order_uniq= 1;
+            }else{
+                $order_uniq=$order_uniq + 1;
+            }
+
             $order = new Order();
+            $order->order_no= 'ORD'.$order_uniq;
             $order->user_id = Auth::user()->id ?? '';
             $order->paid_way = $request->paid_way;
-          
+
             if ($request->file('image')) {
                 $image_name = md5($order->id . "app" . $order->id . rand(1, 1000));
 

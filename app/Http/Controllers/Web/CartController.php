@@ -22,7 +22,7 @@ class CartController extends Controller
             toastr()->error('موجود بالعربة');
             return back();
         } else {
-          /*  $input['user_id'] = Auth::user()->id ?? 'None';
+            /*  $input['user_id'] = Auth::user()->id ?? 'None';
             $input['total'] = $input['price'] * $input['quantity'];
             $cart = Cart::create($input);
             $cart->save();
@@ -30,16 +30,15 @@ class CartController extends Controller
             return back();*/
             $cart = Cart::create([
                 'product_id' => $request->product_id,
-                'user_id'=>Auth::user()->id ?? 'None',
+                'user_id' => Auth::user()->id ?? 'None',
                 'quantity' => $request->quantity,
-                'price' =>$request->price,
-                'total' =>$request['price'] * $request['quantity'] ,
+                'price' => $request->price,
+                'total' => $request['price'] * $request['quantity'],
             ]);
             //$cart->setTotal();
             $cart->save();
             toastr()->success('تمت الاضافة المنتج بنجاح');
             return back();
-
         }
     }
 
@@ -51,7 +50,7 @@ class CartController extends Controller
         $subtotal = Cart::sum('total');
         $count_cart = Cart::where('user_id', Auth::user()->id ?? 'None')->count();
         $sum_total = Cart::where('user_id', Auth::user()->id ?? 'None')->sum('total');
-        return view('landinpage.cart.cart',(['products'=>$products, 'subtotal'=>$subtotal, 'count_cart'=> number_format($count_cart, 2), 'sum_total' => number_format($sum_total, 2)]));
+        return view('landinpage.cart.cart', (['products' => $products, 'subtotal' => $subtotal, 'count_cart' => number_format($count_cart, 2), 'sum_total' => number_format($sum_total, 2)]));
         return view('landinpage.cart.cart');
     }
 
@@ -65,13 +64,13 @@ class CartController extends Controller
             'price' => 'required',
         ]);
         $cart = Cart::find($id);
-        $cart->total=$cart->price * $input['quantity'];
+        $cart->total = $cart->price * $input['quantity'];
         // dd($cart->total);
         if (!$cart) {
             toastr()->error(' غير موجود بالعربة');
             return back();
         } else {
-            
+
             $cart = $cart->update($input);
             toastr()->success('تم تحديث العربة ');
             return back();

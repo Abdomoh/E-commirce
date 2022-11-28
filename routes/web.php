@@ -12,6 +12,7 @@ use App\Http\Controllers\Web\OrderController;
 use App\Http\Controllers\Web\SearchController;
 use App\Http\Controllers\Web\AboutController;
 use App\Http\Controllers\Web\PostControlller;
+use App\Http\Controllers\Web\SocilateController;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Post;
@@ -78,9 +79,13 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'roles', 'roles' => ['adm
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('posts', PostController::class);
+    Route::get('orders', [OrdersController::class, 'index']);
+    Route::get('update-order/{id}', [OrdersController::class, 'updateStatusOrder']);
+    Route::get('show-order/{id}', [OrdersController::class, 'showOrder']);
 });
 
 Route::get('/migrate', function () {
+
     //Artisan::call('migrate', array('--force' => true));
     Artisan::call('migrate', ["--force" => true]);
     Artisan::call('route:clear');
@@ -89,3 +94,9 @@ Route::get('/migrate', function () {
     Artisan::call('view:clear');
     return "Migrating Is Done";
 });
+
+
+/*test login Facebook*/
+Route::get('login/{google}', [SocilateController::class, 'redirect']);
+Route::get('login/{google}/callback', [SocilateController::class, 'callback']);
+/*end test*/

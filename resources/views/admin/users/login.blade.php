@@ -70,6 +70,7 @@
                 <div class="col-lg-12 text-center">
                     <button type="submit" class="btn btn-info btn-block">دخول</button><br>
                     <a href="{{url('register')}}" style="color:blue;"> تسجيل </a>
+                    <a href="{{url('login/google')}}" style="color:blue;"> تسجيل </a>
                 </div>
             </div>
         </form>

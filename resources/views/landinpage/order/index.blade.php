@@ -60,37 +60,36 @@
                                     <tbody>
                                         @foreach($orders as $order)
                                         <tr style="font-size: 17px;">
-                                            <td>{{$order->id}}</td>
+                                            <td>{{$order->order_no}}</td>
                                             <td>{{$order->total}}
 
                                             </td>
 
-                                            @if($order->status_id == 1)
-                                            <td class="text-danger">{{$order->status->name ?? ''}}</td>
+                                            @if($order->status_id == 2)
+
+                                            <td><label class="btn btn-success">{{$order->status->name ?? ''}}</label></td>
                                             @else
-                                            <td class="text-success">{{$order->status->name ?? ''}}</td>
+                                            <td><label class="btn btn-danger">{{$order->status->name ?? ''}}</label></td>
                                             @endif
                                             <td>{{$order->created_at}}</td>
-                                            <td><a href="../order/{{$order->id}}"><span ><i class="fa fa-eye" title="  Show Order Details " style="color:#f8ab37;"></i></span></a>
+                                            <td><a href="../order/{{$order->id}}"><span><i class="fa fa-eye" title="  Show Order Details " style="color:#f8ab37;"></i></span></a>
                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table><!-- End .table table-summary -->
-                           
+
                                 <div class="col-lg-12">
                                     <div class="shoping__checkout">
-                                        <ul>
-                                            <li>المجموع<span>${{number_format($orders->sum('total'),2)}}</span></li>
-                                   
-                                        </ul>
-                             
+                                        <h4><span class="text-danger"> المجموع:{{number_format($orders->sum('total'),2)}}$</span></h4>
+
+
                                     </div>
                                 </div>
                                 <hr>
                                 @endif
                             </div><!-- .End .tab-pane -->
-                            
+
 
                         </div><!-- .End .tab-pane -->
                     </div>

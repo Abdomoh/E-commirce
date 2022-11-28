@@ -29,7 +29,8 @@
             <div class="col-lg-8 col-md-4">
 
                 <div class="checkout__order">
-                    <h5 style="float:left;">{{date('Y-m-d')}}</h5>
+                <h5 style="float:left;">{{date('Y-m-d')}}</h5>
+                    <h4 style="float:right;">رقم الفاتورة :{{$order->order_no}}</h4>
                     <h4>تفاصيل العميل</h4>
 
                     <div class="shoping__cart__table">
